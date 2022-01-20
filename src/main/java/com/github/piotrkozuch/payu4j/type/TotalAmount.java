@@ -1,8 +1,12 @@
 package com.github.piotrkozuch.payu4j.type;
 
-public class TotalAmount extends PayU4JType<Long>{
+public class TotalAmount extends PayU4JType<Long> {
 
-    public TotalAmount(Long value) {
+    private TotalAmount(Long value) {
         super(value);
+    }
+
+    public static TotalAmount from(Long value) {
+        return new TotalAmount(value);
     }
 }

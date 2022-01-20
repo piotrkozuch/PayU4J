@@ -5,6 +5,7 @@
   "description": "RTV market",
   "currencyCode": "PLN",
   "totalAmount": "21000",
+  "extOrderId": "gkwmvn7f0kpbx5g884ny32",
   "buyer": {
     "email": "john.doe@example.com",
     "phone": "654111654",

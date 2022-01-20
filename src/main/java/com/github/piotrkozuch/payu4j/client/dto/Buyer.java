@@ -42,9 +42,17 @@ public class Buyer {
             return new Buyer(this);
         }
 
+        public Builder email(String email) {
+            return email(Email.from(email));
+        }
+
         public Builder email(Email email) {
             this.email = email;
             return this;
+        }
+
+        public Builder phone(String phone) {
+            return phone(Phone.from(phone));
         }
 
         public Builder phone(Phone phone) {
@@ -52,14 +60,26 @@ public class Buyer {
             return this;
         }
 
+        public Builder firstName(String firstName) {
+            return firstName(FirstName.from(firstName));
+        }
+
         public Builder firstName(FirstName firstName) {
             this.firstName = firstName;
             return this;
         }
 
+        public Builder lastName(String lastName) {
+            return lastName(LastName.from(lastName));
+        }
+
         public Builder lastName(LastName lastName) {
             this.lastName = lastName;
             return this;
+        }
+
+        public Builder language(String language) {
+            return language(Language.from(language));
         }
 
         public Builder language(Language language) {

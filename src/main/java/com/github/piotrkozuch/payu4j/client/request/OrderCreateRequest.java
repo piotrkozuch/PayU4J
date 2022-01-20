@@ -6,6 +6,7 @@ import com.github.piotrkozuch.payu4j.json.Json;
 import com.github.piotrkozuch.payu4j.type.CurrencyCode;
 import com.github.piotrkozuch.payu4j.type.CustomerIp;
 import com.github.piotrkozuch.payu4j.type.Description;
+import com.github.piotrkozuch.payu4j.type.ExtOrderId;
 import com.github.piotrkozuch.payu4j.type.MerchantPosId;
 import com.github.piotrkozuch.payu4j.type.NotifyUrl;
 import com.github.piotrkozuch.payu4j.type.TotalAmount;
@@ -20,6 +21,7 @@ public final class OrderCreateRequest implements PayU4JRequest {
     public final TotalAmount totalAmount;
     public final Buyer buyer;
     public final Products products;
+    public final ExtOrderId extOrderId;
 
     private OrderCreateRequest(Builder builder) {
         this.notifyUrl = builder.notifyUrl;
@@ -30,6 +32,7 @@ public final class OrderCreateRequest implements PayU4JRequest {
         this.totalAmount = builder.totalAmount;
         this.buyer = builder.buyer;
         this.products = builder.products;
+        this.extOrderId = builder.extOrderId;
     }
 
     @Override
@@ -47,6 +50,7 @@ public final class OrderCreateRequest implements PayU4JRequest {
         private TotalAmount totalAmount;
         private Buyer buyer;
         private Products products;
+        private ExtOrderId extOrderId;
 
         private Builder() {
 
@@ -60,9 +64,17 @@ public final class OrderCreateRequest implements PayU4JRequest {
             return new OrderCreateRequest(this);
         }
 
+        public Builder notifyUrl(String notifyUrl) {
+            return notifyUrl(NotifyUrl.from(notifyUrl));
+        }
+
         public Builder notifyUrl(NotifyUrl notifyUrl) {
             this.notifyUrl = notifyUrl;
             return this;
+        }
+
+        public Builder customerIp(String customerIp) {
+            return customerIp(CustomerIp.from(customerIp));
         }
 
         public Builder customerIp(CustomerIp customerIp) {
@@ -70,9 +82,17 @@ public final class OrderCreateRequest implements PayU4JRequest {
             return this;
         }
 
+        public Builder merchantPosId(String merchantPosId) {
+            return merchantPosId(MerchantPosId.from(merchantPosId));
+        }
+
         public Builder merchantPosId(MerchantPosId merchantPosId) {
             this.merchantPosId = merchantPosId;
             return this;
+        }
+
+        public Builder description(String description) {
+            return description(Description.from(description));
         }
 
         public Builder description(Description description) {
@@ -83,6 +103,10 @@ public final class OrderCreateRequest implements PayU4JRequest {
         public Builder currencyCode(CurrencyCode currencyCode) {
             this.currencyCode = currencyCode;
             return this;
+        }
+
+        public Builder totalAmount(Long totalAmount) {
+            return totalAmount(TotalAmount.from(totalAmount));
         }
 
         public Builder totalAmount(TotalAmount totalAmount) {
@@ -99,5 +123,15 @@ public final class OrderCreateRequest implements PayU4JRequest {
             this.products = products;
             return this;
         }
+
+        public Builder currencyCode(String currencyCode) {
+            return currencyCode(CurrencyCode.from(currencyCode));
+        }
+
+        public Builder extOrderId(String extOrderId) {
+            this.extOrderId = ExtOrderId.from(extOrderId);
+            return this;
+        }
+
     }
 }

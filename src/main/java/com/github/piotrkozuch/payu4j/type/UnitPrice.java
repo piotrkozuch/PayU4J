@@ -2,8 +2,11 @@ package com.github.piotrkozuch.payu4j.type;
 
 public class UnitPrice extends PayU4JType<Long> {
 
-    public UnitPrice(Long value) {
+    private UnitPrice(Long value) {
         super(value);
     }
 
+    public static UnitPrice from(Long value) {
+        return new UnitPrice(value);
+    }
 }

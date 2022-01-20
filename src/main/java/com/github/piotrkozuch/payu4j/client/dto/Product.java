@@ -1,4 +1,8 @@
-package com.github.piotrkozuch.payu4j.type;
+package com.github.piotrkozuch.payu4j.client.dto;
+
+import com.github.piotrkozuch.payu4j.type.Name;
+import com.github.piotrkozuch.payu4j.type.Quantity;
+import com.github.piotrkozuch.payu4j.type.UnitPrice;
 
 public class Product {
 
@@ -30,9 +34,17 @@ public class Product {
             return new Product(this);
         }
 
+        public Builder name(String name) {
+            return name(Name.from(name));
+        }
+
         public Builder name(Name name) {
             this.name = name;
             return this;
+        }
+
+        public Builder unitPrice(long unitPrice) {
+            return unitPrice(UnitPrice.from(unitPrice));
         }
 
         public Builder unitPrice(UnitPrice unitPrice) {
@@ -40,9 +52,14 @@ public class Product {
             return this;
         }
 
+        public Builder quantity(int quantity) {
+            return quantity(Quantity.from(quantity));
+        }
+
         public Builder quantity(Quantity quantity) {
             this.quantity = quantity;
             return this;
         }
+
     }
 }

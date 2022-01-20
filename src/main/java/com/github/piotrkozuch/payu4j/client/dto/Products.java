@@ -1,7 +1,5 @@
 package com.github.piotrkozuch.payu4j.client.dto;
 
-import com.github.piotrkozuch.payu4j.type.Product;
-
 import java.util.ArrayList;
 import java.util.Collection;
 

@@ -3,7 +3,6 @@ package com.github.piotrkozuch.payu4j.type;
 import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
-import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
 public class PayU4JType<T> {
 
@@ -14,7 +13,7 @@ public class PayU4JType<T> {
     }
 
     public String toString() {
-        return reflectionToString(this);
+        return value.toString();
     }
 
     @Override
