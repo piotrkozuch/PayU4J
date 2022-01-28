@@ -4,14 +4,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.github.piotrkozuch.payu4j.exception.JsonParsingException;
 import com.github.piotrkozuch.payu4j.exception.PayU4JException;
 import com.github.piotrkozuch.payu4j.json.serializer.PayU4JTypeSerializer;
+import com.github.piotrkozuch.payu4j.type.ClientId;
+import com.github.piotrkozuch.payu4j.type.ClientSecret;
 import com.github.piotrkozuch.payu4j.type.CurrencyCode;
 import com.github.piotrkozuch.payu4j.type.CustomerIp;
 import com.github.piotrkozuch.payu4j.type.Description;
 import com.github.piotrkozuch.payu4j.type.Email;
 import com.github.piotrkozuch.payu4j.type.ExtOrderId;
 import com.github.piotrkozuch.payu4j.type.FirstName;
+import com.github.piotrkozuch.payu4j.type.GrantType;
 import com.github.piotrkozuch.payu4j.type.Language;
 import com.github.piotrkozuch.payu4j.type.LastName;
 import com.github.piotrkozuch.payu4j.type.MerchantPosId;
@@ -36,6 +40,22 @@ public class Json {
         }
     }
 
+    public static JsonNode parse(String body) {
+        try {
+            return OBJECT_MAPPER.readTree(body);
+        } catch (JsonProcessingException e) {
+            throw new JsonParsingException(e);
+        }
+    }
+
+    public static <T> T parse(String body, Class<T> clazz) {
+        try {
+            return OBJECT_MAPPER.readValue(body, clazz);
+        } catch (JsonProcessingException e) {
+            throw new JsonParsingException(e);
+        }
+    }
+
     private static ObjectMapper initObjectMapper() {
         final var objectMapper = new ObjectMapper();
 
@@ -54,18 +74,13 @@ public class Json {
                 Phone.class,
                 Quantity.class,
                 TotalAmount.class,
-                ExtOrderId.class)
+                ExtOrderId.class,
+                ClientId.class,
+                ClientSecret.class,
+                GrantType.class)
             .forEach(clazz -> module.addSerializer(clazz, new PayU4JTypeSerializer<>()));
 
         objectMapper.registerModule(module);
         return objectMapper;
-    }
-
-    public static JsonNode parse(String body) {
-        try {
-            return OBJECT_MAPPER.readTree(body);
-        } catch (JsonProcessingException e) {
-            throw new PayU4JException(e);
-        }
     }
 }
